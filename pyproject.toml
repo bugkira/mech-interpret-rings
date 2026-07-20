@@ -1,0 +1,29 @@
+[project]
+name = "gf-grokking"
+version = "0.1.0"
+description = "Механистическая интерпретируемость: феномен гроккинга на полях Галуа GF(2^n)"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.1",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "tensorboard>=2.16",
+    "mlflow>=3.14.0",
+    "optuna",
+    "sympy>=1.12",
+    "scikit-learn>=1.5",
+    "ripser>=0.6.10",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ipykernel>=6.29",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

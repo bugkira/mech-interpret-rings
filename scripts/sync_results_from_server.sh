@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Pull final_rings_for_paper results from GPU server (incremental, no archive dump).
 #
-# Default: only sleep-grid experiment data (~200 MB), NOT the 10 GB checkpoint archive
+# Default: only grok-grid experiment data (~200 MB), NOT the 10 GB checkpoint archive
 # that was rsync'd to the server once for seeding.
 #
 # Usage:
@@ -30,7 +30,7 @@ if [[ -n "${RSYNC_RSH:-}" ]]; then
   RSYNC+=(-e "$RSYNC_RSH")
 fi
 
-mkdir -p "${LOCAL}/logs/sleep_grid" "${LOCAL}/new_paper_rings" "${LOCAL}/mlruns_final_rings"
+mkdir -p "${LOCAL}/logs/grok_grid" "${LOCAL}/new_paper_rings" "${LOCAL}/mlruns_final_rings"
 
 echo "→ mlflow_server.db (experiment final_rings_for_paper)"
 "${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/mlflow.db" "${LOCAL}/mlflow_server.db"
@@ -46,11 +46,11 @@ fi
 echo "→ mlruns_final_rings/1/ (MLflow artifacts for this experiment only)"
 "${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/mlruns/1/" "${LOCAL}/mlruns_final_rings/1/"
 
-echo "→ logs/sleep_grid/"
-"${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/logs/sleep_grid/" "${LOCAL}/logs/sleep_grid/"
+echo "→ logs/grok_grid/"
+"${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/logs/grok_grid/" "${LOCAL}/logs/grok_grid/"
 
-echo "→ sleep_grid_results.json"
-"${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/new_paper_rings/sleep_grid_results.json" "${LOCAL}/new_paper_rings/"
+echo "→ grok_grid_results.json"
+"${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/new_paper_rings/grok_grid_results.json" "${LOCAL}/new_paper_rings/"
 
 if [[ "$CK_MODE" == "0" ]]; then
   echo "→ checkpoints/ skipped (SYNC_CHECKPOINTS=0)"
@@ -59,7 +59,7 @@ elif [[ "$CK_MODE" == "all" ]]; then
   mkdir -p "${LOCAL}/checkpoints"
   "${RSYNC[@]}" "${REMOTE}:${REMOTE_DIR}/checkpoints/" "${LOCAL}/checkpoints/"
 else
-  echo "→ checkpoints/ sleep-grid tags only (zheng_wd01|wd1|wd2, ~500 MB)"
+  echo "→ checkpoints/ grok-grid tags only (zheng_wd01|wd1|wd2, ~500 MB)"
   mkdir -p "${LOCAL}/checkpoints"
   set +e
   "${RSYNC[@]}" \

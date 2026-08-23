@@ -6,7 +6,7 @@ PyTorch reproduction of *From Groups to Rings* (Zheng et al., 2026) on $T_n(\mat
 
 ## Setup
 
-All commands assume repository root `mech_interpret_groups`:
+All commands assume repository root `mech-interpret-rings`:
 
 ```bash
 cd ..   # repo root
@@ -42,7 +42,7 @@ Paths relative to repo root unless noted.
 |-------|--------|-------------------|
 | Tab. ring-roster | (structure only) | Wedderburn labels in Sec.~3.2 |
 | Tab. grok-summary (a) | `ring_benchmark_matched_exposure.py`; `ring_transformer.py` | Six-ring NC benchmark; matched exp. + 100k steps |
-| Tab. grok-summary (b) | `sleep_grid.py` | $8×3×8$ grid; `sleep_grid_results.json` |
+| Tab. grok-summary (b) | `grok_grid.py` | $8×3×8$ grid; `grok_grid_results.json` |
 | Tab. zheng-repro | `scripts/zheng_commutative_repro.py` | Rings `f8_x_f8`, `f2_z6`, `f3_z4`, extensions `lam_f2_k3t`, `lam_f3_k2`; `--zheng-protocol`; `zheng_commutative_repro_seed42.json` |
 | Tab. nc-iia-summary (hierarchy + per-component) | `scripts/ring_iia_hierarchy.py`; `scripts/ring_transformer_iia.py` | Product: `grok_wd01_seed42`; $T_3$: `lr5e4_seed42`; IIA seed 44 |
 | Fig. iia-hierarchy | `scripts/make_paper_iia_figure.py` | → `plots/alt_group_interp/article_runs/tri2_f3_x_f3_x_f3_paper_iia.png` |
@@ -55,7 +55,7 @@ Paths relative to repo root unless noted.
 | Tab. probe-fit | `scripts/ring_probe_fit_compare.py` | `probe_fit_compare/*.json` |
 | Tab. classmean-probe | `scripts/ring_classmean_probe_compare.py` | `*classmean_probe_compare.json` |
 | Tabs. tri2/tri2xf3 multiseed | `experiments/ring_transformer.py` | `--weight-decay 2 --lr 5e-3`; rings `tri2_f3`, `tri2_f3_x_f3`; seeds 42–47 |
-| Tab. sleep-grid-grok (legacy) | `scripts/sleep_grid.py` | rows fragment → `generated/sleep_grid_grok_rows.tex` inside `tab:grok-summary` |
+| Tab. grok-grid-grok (legacy) | `scripts/grok_grid.py` | rows fragment → `generated/grok_grid_rows.tex` inside `tab:grok-summary` |
 | Tab. das-multiseed | `scripts/das_parallel.py`; `das_multiseed_stats.py` | `zheng_wd2` ckpts seeds 42–47 vs random-init; `*_das_multiseed_stats.json` |
 
 ---
@@ -115,9 +115,9 @@ Rings: `f8_x_f8`, `f2_z6`, `mat2_f2_x_mat2_f2`, `lam_f2_k3t`, `lam_f3_k2`, `tri2
 Weight decay: 0.1 / 1.0 / 2.0 (lr=$10^{-3}$ except $\lambda=2.0$ → lr=$5×10^{-3}$). Seeds: 42–49. All jobs require `--zheng-protocol`.
 
 ```bash
-uv run python scripts/sleep_grid.py --parallel 3 --device cuda --skip-existing
-uv run python scripts/sleep_grid.py --summarize   # → sleep_grid_results.json + generated/sleep_grid_grok_rate.tex
-uv run python scripts/sleep_grid.py --link-existing
+uv run python scripts/grok_grid.py --parallel 3 --device cuda --skip-existing
+uv run python scripts/grok_grid.py --summarize   # → grok_grid_results.json + generated/grok_grid_rate.tex
+uv run python scripts/grok_grid.py --link-existing
 ```
 
 Sync from GPU server: `bash scripts/sync_results_from_server.sh user@host ~/final_rings_for_paper`

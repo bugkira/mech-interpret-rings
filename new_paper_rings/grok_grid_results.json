@@ -1,5 +1,5 @@
 {
-  "protocol": "sleep_grid_zheng",
+  "protocol": "grok_grid_zheng",
   "rings": [
     "f8_x_f8",
     "f2_z6",

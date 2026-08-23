@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Parallel DAS on GPU server (after sleep grid). Uses .venv, NOT uv run.
+# Parallel DAS on GPU server (after grokking grid). Uses .venv, NOT uv run.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONUNBUFFERED=1
@@ -14,7 +14,7 @@ if [[ ! -x "$PYTHON" ]]; then
   exit 1
 fi
 
-"$PYTHON" scripts/sleep_grid.py --summarize
+"$PYTHON" scripts/grok_grid.py --summarize
 
 case "$PHASE" in
   multiseed-iia)

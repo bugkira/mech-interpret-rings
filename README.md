@@ -1,9 +1,9 @@
 # Non-commutative finite algebras — reproducibility code
 
-Self-contained PyTorch code accompanying the anonymous workshop submission
-(Zheng-style commutative replication, NC ring/algebra grokking grid, IIA / DAS probes).
+PyTorch code for mechanistic interpretability of grokking on non-commutative finite algebras
+(Zheng-style commutative replication, grokking grid, IIA / DAS probes).
 
-Anonymous mirror (reviewers): https://anonymous.4open.science/r/mech-interpret-rings/
+Repository: https://github.com/bugkira/mech-interpret-rings
 
 ## Setup
 
@@ -20,11 +20,11 @@ uv run python scripts/register_mlflow_experiment.py
 uv run pytest tests/test_zheng_protocol.py tests/test_finite_rings.py tests/test_true_algebras.py -q
 ```
 
-## Sleep grid (192 runs: 8 algebras × 3 λ × 8 seeds)
+## Grokking grid (192 runs: 8 algebras × 3 λ × 8 seeds)
 
 ```bash
-uv run python scripts/sleep_grid.py --parallel 3 --device cuda --skip-existing
-uv run python scripts/sleep_grid.py --summarize
+uv run python scripts/grok_grid.py --parallel 3 --device cuda --skip-existing
+uv run python scripts/grok_grid.py --summarize
 ```
 
 | Parameter | Value |

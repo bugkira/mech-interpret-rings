@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "new_paper_rings"
 LOG_DIR = ROOT / "logs" / "das_parallel"
-SLEEP_GRID_JSON = ROOT / "new_paper_rings" / "sleep_grid_results.json"
+GROK_GRID_JSON = ROOT / "new_paper_rings" / "grok_grid_results.json"
 
 GROKKED_SEEDS = tuple(range(42, 48))
 RANDOM_SEEDS = tuple(range(43, 53))
@@ -49,9 +49,9 @@ def _ckpt(ring: str, tag: str, seed: int) -> Path:
 
 
 def _pick_grokked_ckpt(ring: str, *, wd: float = 2.0) -> Path | None:
-    """Best grokked checkpoint for DAS baseline (prefers sleep-grid JSON)."""
-    if SLEEP_GRID_JSON.exists():
-        data = json.loads(SLEEP_GRID_JSON.read_text(encoding="utf-8"))
+    """Best grokked checkpoint for DAS baseline (prefers grok-grid JSON)."""
+    if GROK_GRID_JSON.exists():
+        data = json.loads(GROK_GRID_JSON.read_text(encoding="utf-8"))
         grok = [
             r
             for r in data.get("runs", [])
@@ -369,7 +369,7 @@ def main() -> int:
         )
 
     if not jobs:
-        print("No jobs (missing checkpoints?). Run sleep_grid --summarize first.", file=sys.stderr)
+        print("No jobs (missing checkpoints?). Run grok_grid --summarize first.", file=sys.stderr)
         return 1
 
     print(f"DAS parallel: {len(jobs)} jobs, phase={args.phase}, parallel={args.parallel}")
